@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Venue Manager | Home</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff9f9;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #d72638;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      color: #d72638;
+    }
+
+    p {
+      text-align: center;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .images img {
+      width: 30%;
+      border-radius: 10px;
+      margin: 10px;
+      transition: transform 0.3s;
+    }
+
+    .images img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      background-color: #d72638;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>💍 Wedding Venue Manager</h2>
+    <nav>
+      <a href="venue.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+    </nav>
+  </header>
+
+  <h1>Find Your Dream Venue in One Tap</h1>
+  <p>Discover the most stunning wedding venues across Hyderabad.  
+     Explore, compare, and book with ease—all in one place!</p>
+
+  <div class="images">
+    <img src="img/img1.jpg" alt="Venue 1">
+    <img src="img/img2.jpg" alt="Venue 2">
+    <img src="img/img3.jpg" alt="Venue 3">
+  </div>
+  <h2 style="text-align:center; color:#d72638;">Book a Venue</h2>
+
+<form id="bookingForm" style="text-align:center; margin-bottom:40px;">
+  <input type="text" id="name" placeholder="Your Name" required><br><br>
+  <input type="email" id="email" placeholder="Your Email" required><br><br>
+  <input type="text" id="venue" placeholder="Preferred Venue" required><br><br>
+  <button type="submit" style="padding:10px 20px; background:#d72638; color:white; border:none; border-radius:5px;">
+    Book Now
+  </button>
+</form>
+  <footer>
+    &copy; 2025 Wedding Venue Manager | All Rights Reserved
+  </footer>
+
+  <script>
+document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    venue: document.getElementById("venue").value
+  };
+
+  const response = await fetch("http://localhost:5000/book", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+  alert(result.message);
+
+  this.reset();
+});
+</script>
+</body>
+</html>
